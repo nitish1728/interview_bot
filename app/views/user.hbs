@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script defer src="javascript/face-api.min.js"></script>
+  <script defer src="javascript/script.js"></script>
+  <link rel="stylesheet" href="css/user.css">
+  <link rel="icon" href="images/8.png">
+  <link rel="stylesheet " href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css ">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+</head>
+<body>
+  <div class="navbar" id="Home">
+        <div class="logo">
+            <h1>LOGO</h1>
+        </div>
+        <div class="navigation">
+            <a href="/logout">Log Out <i class="fa fa-sign-out"></i></a>
+            <a class="navbar-username"></a>   
+        </div>    
+  </div>
+  <div class="skills">
+    
+    <div class="inside">
+      <h1>Please select respective skills</h1>
+      <select name="skills" id="skills" multiple>
+        <option value="HTML">HTML</option>
+        <option value="CSS">CSS</option>
+        <option value="BOOTSTRAP">BOOTSTRAP</option>
+        <option value="JAVASCRIPT">JAVASCRIPT</option>
+        <option value="ML">ML</option>
+        <option value="DL">DL</option>
+      </select>
+    <center><button onclick="getSelectedSkills()">Submit</button></center>
+    </div>
+  </div>
+  <div class="main skills">
+    <div class="Instructions">
+      <h1>Instructions:</h1>
+      <ol>
+        <li>Make sure you have a stable internet connection and a quiet, well-lit space where you can take the interview.</li>
+        <li>Ensure that you have all necessary materials, such as a calculator or scratch paper, ready before the interview starts.</li>
+        <li>Close all other tabs and applications on your computer, and make sure that your camera is working properly.</li>
+        <li>Don't be too close to the camera it may affect your interview</li>
+        <li>During the interview, do not use any unauthorized materials or resources, and do not communicate with anyone except the proctor.</li>
+        <li>If you experience technical difficulties, notify the proctor immediately.</li>
+        <li>Make sure that you in a room completely covered with light, dim places may affect the interview</li>
+      </ol>
+      <div class="center"><button class="button">Next</button></div>
+      
+    </div>
+  </div>
+  <div class="questions">
+    <div class="question1">
+      <div class="question">
+        <p>What is question1</p>
+      </div>
+      <div class="answer"></div>
+    </div>
+  </div>
+  <div class="bad">
+    <video id="video" width="500" height="400" autoplay muted></video>
+  </div> 
+  <script>
+    var html=["What is tag in HTML?","Explain the difference between div and span tags.","How we can create a hyperlink in HTML?","What is a form in HTML?","How to create a new HTML element?","What is the use of an iframe tag?","Is there any way to keep list elements straight in an HTML file?","How to insert a picture into a background image of a web page?","How do you create text on a webpage that allows you to send an email when clicked?"," How are active links different from normal links?","What is a marquee?","Is the <!DOCTYPE html> tag considered as a HTML tag?","What is the use of an iframe tag?","What is the advantage of collapsing white space?","When is it appropriate to use frames?"]
+    var css=["What is CSS?",  "What are the different ways to include CSS in a web page?",  "What are the selectors in CSS?",  "What is the difference between class and ID selectors in CSS?",  "What are the different types of CSS selectors?",  "What is the box model in CSS?",  "What is the difference between padding and margin in CSS?",  "What is the difference between absolute and relative positioning in CSS?",  "What is the difference between inline and block-level elements in CSS?",  "What is the difference between width and max-width in CSS?",  "What is the difference between display: none and visibility: hidden in CSS?",  "How can you center an element horizontally and vertically in CSS?",  "What is the difference between :nth-child() and :nth-of-type() selectors in CSS?",  "What is the difference between em and rem units in CSS?",  "What is the difference between a pseudo-class and a pseudo-element in CSS?",  "What is the difference between a class and an attribute selector in CSS?",  "What is the difference between the float and clear properties in CSS?",  "What is the difference between flexbox and grid layout in CSS?",  "What is the difference between the transform and transition properties in CSS?",  "What is the difference between position: fixed and position: absolute in CSS?",  "What is the difference between the overflow and overflow-x/overflow-y properties in CSS?",  "What is the difference between opacity and rgba() in CSS?",  "What is the difference between outline and border in CSS?",  "What is the difference between font-size and line-height in CSS?",  "What is the difference between z-index and stacking context in CSS?",  "What is the difference between justify-content and align-items in CSS?",  "What is the difference between vertical-align and line-height in CSS?",  "What is the difference between cursor: pointer and pointer-events: none in CSS?",  "What is the difference between :hover and :focus in CSS?",  "What is the difference between visibility: hidden and opacity: 0 in CSS?",]
+    var bootstrap=["What is Bootstrap?",  "What are the advantages of using Bootstrap?",  "What are the different components available in Bootstrap?",  "What is a grid system in Bootstrap?",  "What are the different types of grid systems available in Bootstrap?",  "What are the different classes available for styling buttons in Bootstrap?",  "What is a navbar in Bootstrap?",  "What is a modal in Bootstrap?",  "What is a carousel in Bootstrap?",  "What is a form group in Bootstrap?",  "What are the different types of forms available in Bootstrap?",  "What is a card in Bootstrap?",  "What is a jumbotron in Bootstrap?",  "What is a badge in Bootstrap?",  "What is a list group in Bootstrap?",  "What is a progress bar in Bootstrap?",  "What is a media object in Bootstrap?",  "What is a responsive utility class in Bootstrap?",  "What is the difference between container and container-fluid in Bootstrap?",  "How can you customize Bootstrap?"]
+    var javascript=["What is JavaScript?",  "What are the different data types in JavaScript?",  "What is the difference between null and undefined in JavaScript?",  "What is the difference between == and === operators in JavaScript?",  "What is the difference between let, var, and const in JavaScript?",  "What is the difference between synchronous and asynchronous code in JavaScript?",  "What are the different types of loops in JavaScript?",  "What are the different types of functions in JavaScript?",  "What is a closure in JavaScript?",  "What is an IIFE (Immediately Invoked Function Expression) in JavaScript?",  "What is a callback function in JavaScript?",  "What is an event in JavaScript?",  "What is the DOM (Document Object Model) in JavaScript?",  "What are the different types of events in JavaScript?",  "What is an AJAX (Asynchronous JavaScript and XML) call in JavaScript?",  "What is a Promise in JavaScript?",  "What is a generator function in JavaScript?",  "What is the spread operator in JavaScript?",  "What is destructuring in JavaScript?",  "What is the difference between let and const in JavaScript?"]
+    var ml=["What is machine learning?",  "What is supervised learning?",  "What is unsupervised learning?",  "What is reinforcement learning?",  "What are the types of machine learning algorithms?",  "What is overfitting in machine learning?",  "What is regularization in machine learning?",  "What is cross-validation in machine learning?",  "What is bias in machine learning?",  "What is variance in machine learning?",  "What is the difference between classification and regression in machine learning?",  "What is the difference between clustering and classification in machine learning?",  "What is the difference between precision and recall in machine learning?",  "What is the difference between accuracy and precision in machine learning?",  "What is gradient descent in machine learning?",  "What is a neural network in machine learning?",  "What is deep learning?",  "What are the applications of machine learning?",  "What is the future of machine learning?",  "What are the ethical concerns surrounding machine learning?"]
+    var empty=[]
+    function getSelectedSkills() {
+      var selectElement = document.getElementById("skills");
+      const skills=document.querySelector(".skills");
+      const main=document.querySelector(".main.skills");
+      main.classList.remove("skills")
+      skills.classList.add("active");
+      var selectedValue=[]
+      for (var i = 0; i < selectElement.options.length; i++) {
+        var option = selectElement.options[i];
+        if (option.selected) {
+          selectedValue.push(option.value);
+          if (option.value==="HTML"){
+            empty=empty.concat(html)
+          }
+          if(option.value=="CSS"){
+            empty=empty.concat(css)
+          }
+          if(option.value=="BOOTSTRAP"){
+            empty=empty.concat(bootstrap)
+          }
+          if(option.value=="JAVASCRIPT"){
+            empty=empty.concat(javascript)
+          }
+          if(option.value=="ML"){
+            empty=empty.concat(ml)
+          }
+        }
+      }
+      console.log(selectedValue)
+      console.log(empty)
+    }
+  </script>
+  <script>
+    const button=document.querySelector(".button");
+    const main=document.querySelector(".main");
+    const bad=document.querySelector(".bad");
+    const questions=document.querySelector(".questions");
+    button.onclick=function(){
+      main.classList.add('active');
+      bad.classList.add("active");
+      questions.classList.add('active');
+    }
+  </script> 
+  
+</body>
+</html>
